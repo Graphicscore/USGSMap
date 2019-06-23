@@ -26,3 +26,16 @@
     top: 0px;
     left: 0px;
 }
+
+.btn-hide-panel {
+    right: 0px;
+    float: right;
+    position: absolute;
+}
+
+#show-panel {
+    position: absolute;
+    top: 50px;
+    z-index: 11;
+    display: none;
+}

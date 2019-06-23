@@ -13,15 +13,23 @@
 </head>
 <body>
     <div class="container">
+            <div id="show-panel">
+                <button id="btn-show-panel" type="button" class="btn-hide-panel btn btn-outline-primary">
+                    &gt;&gt;
+                </button>
+             </div>
             <div id="control-panel">
-                    <h4>Projection</h4>
+                    <div style="display: flex;">
+                        <h4>Projection</h4>
+                        <button id="btn-hide-panel"type="button" class="btn-hide-panel btn btn-outline-primary">
+                            &lt;&lt;
+                        </button>
+                    </div>
                     <div class="dropdown" id="projectionDropdown">
                     </div>
-                    <br>
                     <h4>Layers</h4>
                     <div class="list-group" id="layerList">
                     </div>
-                    <br>
                     <h4>Destination</h4>
                     <div class="input-group" id="searchBox">
                         <input type="text" class="form-control" placeholder="GoTo" id="searchText"/>
