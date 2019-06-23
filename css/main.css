@@ -1,0 +1,28 @@
+#container {
+    width: 100%;
+
+    position: relative;
+    padding-right: 0px;
+    padding-left: 0px;
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+#control-panel {
+    width: 20%;
+
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    color: red;
+    font-size: 40px;
+    z-index: 10;
+}
+
+#globe {
+    width: 100%;
+
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
