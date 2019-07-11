@@ -1,41 +1,85 @@
-#container {
-    width: 100%;
-
-    position: relative;
-    padding-right: 0px;
-    padding-left: 0px;
-    margin-right: 0px;
-    margin-left: 0px;
+body {
+    overflow:hidden;
+    margin:0
 }
-
-#control-panel {
-    width: 20%;
-
-    position: absolute;
-    top: 50px;
-    left: 50px;
-    color: red;
-    font-size: 40px;
-    z-index: 10;
-}
-
 #globe {
     width: 100%;
-
     position: absolute;
     top: 0px;
     left: 0px;
 }
+#top-navBar{
+    position:fixed;
+    display:flex;
+    justify-content:center;
+    align-content: center;
+    width:100%;
+    height: 50px;
+    top:0;
+    z-index: 99;
+    background-color:rgba(0,0,0,0.4);
+}
+#searchBox{
+    position: relative;
+    width: fit-content;
+}
+#searchText{
+    position: relative;
+    align-self: center;
+    justify-self: center;
+    display: flex;
+    width: 25%;
+    border: 3px solid #00B4CC;
+    border-right: none;
+    padding: 5px;
+    height: 30px;
+    border-radius: 5px 0 0 5px;
+    outline: none;
+    color: #9DBFAF;
 
-.btn-hide-panel {
-    right: 0px;
-    float: right;
+}
+#searchButton{
+    position: relative;
+    justify-self: center;
+    align-self: center;
+    display: flex;
+    width: 40px;
+    height: 30px;
+    border: 1px solid #00B4CC;
+    background: #00B4CC;
+    text-align: center;
+    color: #fff;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+    font-size: 20px;
+}
+#map-navBar{
     position: absolute;
+    display: flex;
+    flex-basis: 100%;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 8px;
+    background-color:rgba(0,0,0,0.4);
+    right:30px;
+    bottom:30px;
+    z-index: 99;
+    width:4%;
+    height: fit-content;
 }
 
-#show-panel {
-    position: absolute;
-    top: 50px;
-    z-index: 11;
-    display: none;
+.map-navBar-button{
+    position: relative;
+    border: 3px solid #00B4CC;
+    margin-top:10px;
+    margin-bottom: 15px;
+    display: block;
+    background-color:white;
+    cursor: pointer;
+    border-radius: 18px;
+    box-sizing: border-box;
+    width:35px;
+    height:35px;
 }
+
+    
