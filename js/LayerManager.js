@@ -105,7 +105,7 @@ LayerManager.prototype.onProjectionClick = function (event) {
 
     this.wwd.redraw();
 };
-
+//test
 LayerManager.prototype.onLayerClick = function (layerButton) {
     var layerNameButton = layerButton.val();
     if (layerNameButton == "satelite") {
