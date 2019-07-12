@@ -60,11 +60,12 @@ var LayerManager = function (worldWindow) {
 };
 
 LayerManager.prototype.onProjectionClick = function (event) {
-    var projectionName = $("#projection-toggle-button").text();
+    var projectionName = $("#projection-toggle-button").val();
     //$("#projectionDropdown").find("button").html(projectionName + ' <span class="caret"></span>');
 
     if (projectionName === "3D") {
-        $("#projection-toggle-button").html("2D");
+        $("#projection-toggle-button")[0].value = "2D";
+        $("#projection-toggle-button").find("i").html("texture");
         if (!this.roundGlobe) {
             this.roundGlobe = new WorldWind.Globe(new WorldWind.EarthElevationModel());
         }
@@ -73,7 +74,8 @@ LayerManager.prototype.onProjectionClick = function (event) {
             this.wwd.globe = this.roundGlobe;
         }
     } else {
-        $("#projection-toggle-button").html("3D");
+        $("#projection-toggle-button")[0].value = "3D";
+        $("#projection-toggle-button").find("i").html("3d_rotation");
         if (!this.flatGlobe) {
             this.flatGlobe = new WorldWind.Globe2D();
         }
@@ -105,14 +107,14 @@ LayerManager.prototype.onProjectionClick = function (event) {
 };
 
 LayerManager.prototype.onLayerClick = function (layerButton) {
-    var layerName = layerButton.val();
-    if (layerName == "satelite") {
-        $("#layer-toggle-button").value = "street"
-        $("#layer-toggle-button").text = "STR"
+    var layerNameButton = layerButton.val();
+    if (layerNameButton == "satelite") {
+        $("#layer-toggle-button")[0].value = "street";
+        $("#layer-toggle-button").find("i").html("map")
         layerName = "Bing Roads";
-    } else if (layerName == "street") {
-        $("#layer-toggle-button").value = "satelite"
-        $("#layer-toggle-button").text = "SAT"
+    } else if (layerNameButton == "street") {
+        $("#layer-toggle-button")[0].value = "satelite";
+        $("#layer-toggle-button").find("i").html("satellite")
         layerName = "Bing Aerial with Labels";
     }
     // Update the layer state for the selected layer.
