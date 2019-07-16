@@ -6,19 +6,19 @@ WorldWind.Logger.setLoggingLevel(WorldWind.Logger.LEVEL_WARNING);
 // Create and add layers to the WorldWindow.
 var layers = [
     // Imagery layers.
-    {layer: new WorldWind.BMNGLayer(), enabled: true, visibleInMenu: false},
+    { layer: new WorldWind.BMNGLayer(), enabled: true, visibleInMenu: false },
     //{layer: new WorldWind.BMNGLandsatLayer(), enabled: false},
-    {layer: new WorldWind.BingAerialLayer(null), enabled: true, visibleInMenu: true},
-    {layer: new WorldWind.BingAerialWithLabelsLayer(null), enabled: true, visibleInMenu: true},
-    {layer: new WorldWind.BingRoadsLayer(null), enabled: false, visibleInMenu: true},
+    { layer: new WorldWind.BingAerialLayer(null), enabled: true, visibleInMenu: true },
+    { layer: new WorldWind.BingAerialWithLabelsLayer(null), enabled: true, visibleInMenu: true },
+    { layer: new WorldWind.BingRoadsLayer(null), enabled: false, visibleInMenu: true },
 
     //{layer: new WorldWind.RenderableLayer("Markers"), enabled: false, visibleInMenu: true},
     //{layer: new WorldWind.OpenStreetMapImageLayer(null), enabled: false},
     // Add atmosphere layer on top of all base layers.
-    {layer: new WorldWind.AtmosphereLayer(), enabled: true, visibleInMenu: false},
+    { layer: new WorldWind.AtmosphereLayer(), enabled: true, visibleInMenu: false },
     // WorldWindow UI layers.
     //{layer: new WorldWind.CompassLayer(), enabled: true},
-    {layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true, visibleInMenu: false},
+    { layer: new WorldWind.CoordinatesDisplayLayer(wwd), enabled: true, visibleInMenu: false },
     //{layer: new WorldWind.ViewControlsLayer(wwd), enabled: true}
 ];
 
@@ -54,38 +54,30 @@ wwd.addLayer(renderLayer);
 
 var layerManager = new LayerManager(wwd);*/
 
-requestUSGSData(USGS_TimeSpan.PAST_THIRTY_DAYS,USGS_Intensity.ALL,function(res){
+requestUSGSData(USGS_TimeSpan.PAST_DAY, USGS_Intensity.ALL, function (res) {
     var result = res.body;
     //console.log(result);
+    if (result) {
+        var renderLayer = new WorldWind.RenderableLayer("Markers");
+        renderLayer.enabled = true;
+        renderLayer.visibleInMenu = true;
 
-    var renderLayer = new WorldWind.RenderableLayer("Markers");
-    renderLayer.enabled = true;
-    renderLayer.visibleInMenu =  true;
+        var attributes = new WorldWind.ShapeAttributes(null);
+        attributes.outlineColor = WorldWind.Color.RED;
+        attributes.interiorColor = new WorldWind.Color(0, 1, 1, 1);
 
-    var attributes = new WorldWind.ShapeAttributes(null);
-    attributes.outlineColor = WorldWind.Color.RED;
-    attributes.interiorColor = new WorldWind.Color(0, 1,1, 1);
+        // Create common highlight attributes. These are displayed whenever the user hovers over the shapes.
+        var highlightAttributes = new WorldWind.ShapeAttributes(attributes);
+        highlightAttributes.interiorColor = new WorldWind.Color(0, 1, 1, 1);
 
-    // Create common highlight attributes. These are displayed whenever the user hovers over the shapes.
-    var highlightAttributes = new WorldWind.ShapeAttributes(attributes);
-    highlightAttributes.interiorColor = new WorldWind.Color(0, 1, 1, 1);
-
-
-    result.features.forEach(function(entry) {
-        var circle = new WorldWind.SurfaceCircle(new WorldWind.Location(entry.geometry.coordinates[1], entry.geometry.coordinates[0]), 25e3, attributes);
-        //var circle = new WorldWind.SurfaceCircle(WorldWind.Location.fromRadians(104.9461, 28.5145), 25e3, attributes);
-
-        circle.highlightAttributes = highlightAttributes;
-    
-        renderLayer.addRenderable(circle);
-    });
-
-   
-
-    wwd.addLayer(renderLayer);
-
-    var layerManager = new LayerManager(wwd);
-}, function(err) {
+        result.features.forEach(function (entry) {
+            var circle = new WorldWind.SurfaceCircle(new WorldWind.Location(entry.geometry.coordinates[1], entry.geometry.coordinates[0]), 25e3, attributes);
+            circle.highlightAttributes = highlightAttributes;
+            renderLayer.addRenderable(circle);
+        });
+        wwd.addLayer(renderLayer);
+    }
+}, function (err) {
     console.error(err);
 });
 
@@ -176,23 +168,23 @@ $.get(serviceAddress).done(createLayer).fail(logError);*/
 
 // UI STUFF
 
-function hidePanel(){
-    $("#control-panel").hide("slide", {direction: "left"}, "slow", function() {
-        $("#show-panel").show("fade","fast");
+function hidePanel() {
+    $("#control-panel").hide("slide", { direction: "left" }, "slow", function () {
+        $("#show-panel").show("fade", "fast");
     });
 }
 
 function showPanel() {
-    $("#show-panel").hide("fade","fast", function() {
-        $("#control-panel").show("slide", {direction: "left"}, "slow");
+    $("#show-panel").hide("fade", "fast", function () {
+        $("#control-panel").show("slide", { direction: "left" }, "slow");
     });
 }
 
-$(document).ready(function() { 
-    $("#btn-hide-panel").click(function() { 
-        hidePanel(); 
-    }); 
-    $("#btn-show-panel").click(function() { 
-        showPanel(); 
-    }); 
+$(document).ready(function () {
+    $("#btn-hide-panel").click(function () {
+        hidePanel();
+    });
+    $("#btn-show-panel").click(function () {
+        showPanel();
+    });
 }); 
