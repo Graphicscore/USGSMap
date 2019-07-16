@@ -125,7 +125,7 @@ LayerManager.prototype.onLayerClick = function (layerButton) {
             continue;
         }
 
-        if (layer.displayName === layerName) {
+        if (layer.displayName === layerNameButton) {
             layer.enabled = !layer.enabled;
             this.wwd.redraw();
             break;
